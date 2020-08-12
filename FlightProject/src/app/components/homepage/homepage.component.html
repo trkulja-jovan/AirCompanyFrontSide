@@ -1,0 +1,119 @@
+<div id="booking" class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <form (ngSubmit)="searchFlight()" #searchForm="ngForm">
+                        <div class="form-group">
+                            <div class="form-checkbox">
+                                <label for="roundtrip">
+                                    <input type="radio" 
+                                           id="roundtrip" 
+                                           name="flight-type"
+                                           (change)="onItemChange($event.target.value, 2)" >
+                                    <span></span>Povratno putovanje
+                                </label>
+                                <label for="one-way">
+                                    <input type="radio" id="one-way" name="flight-type" (change)="onItemChange($event.target.value, 1)">
+                                    <span></span>Jedan pravac
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Let od</span>
+                                    <select class="form-control" 
+                                            name="comboOd" 
+                                            [(ngModel)]="searchRes.idAerodromOd"
+                                            (change)="selectChangeHandler($event, 1)" >
+                                        
+                                        <option *ngFor="let a of airports" [value]="a.idAerodrom">
+                                            {{a.drzava}} - {{ a.grad }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Let do</span>
+                                    <select class="form-control" 
+                                            name="comboDo" 
+                                            [(ngModel)]="searchRes.idAerodromDo"
+                                            (change)="selectChangeHandler($event, 2)">
+                                        <option *ngFor="let a of airports"  
+                                                [value]="a.idAerodrom">
+                                            {{a.drzava}} - {{ a.grad }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Datum polaska</span>
+                                    <input class="form-control" 
+                                           type="date" 
+                                           required
+                                           [(ngModel)]="searchRes.datumPolaska"
+                                           name="datumPolaska"
+                                           [max]="todayDate"
+                                           (input)="onDateChange()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="form-label">Datum povratka</span>
+                                    <input class="form-control" 
+                                           type="date" 
+                                           required 
+                                           [(ngModel)]="searchRes.datumPovratka"
+                                           name="datumPovratka"
+                                           [min]="searchRes.datumPolaska"
+                                           [value]="dateReceived">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="form-label">Broj putnika (+18)</span>
+                                    <select class="form-control"
+                                            [(ngModel)]="searchRes.brPutnika"
+                                            name="putnici">
+                                         <option *ngFor="let x of adult" [value]="x">
+                                                {{x}}
+                                         </option>
+
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="form-label">Deca ( 0-17 )</span>
+                                    <select class="form-control" 
+                                            [(ngModel)]="searchRes.brDece"
+                                            name="deca">
+                                        <option *ngFor="let x of children" [value]="x">
+                                            {{x}}
+                                        </option>
+
+                                    </select>
+                                    <span class="select-arrow"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <div class="form-btn">
+                                    <button class="submit-btn" type="submit"
+                                    >Prikaži letove</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

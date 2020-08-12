@@ -1,0 +1,40 @@
+<div id="page">
+  <div id="login">
+    <h3 class="text-center text-white pt-5"></h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form">
+                        <h3 class="text-center text-info">Prijavljivanje na sistem</h3>
+                        <div class="form-group">
+                            <label for="username" 
+                                   class="text-info">Korisničko ime</label><br>
+                            <input [(ngModel)]="userForLogin.username"
+                                   type="text" 
+                                   name="username" 
+                                   id="username" 
+                                   class="form-control ng-valid ng-untouched ng-pristine" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Lozinka</label><br>
+                            <input [(ngModel)]="userForLogin.password" 
+                                   type="password" 
+                                   name="password" 
+                                   id="password" 
+                                   class="form-control ng-valid ng-untouched ng-pristine" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="remember-me" class="text-info"><span></span><span><a class="nav-link" routerLink="/register" class="text-info">Zaboravljena lozinka?</a></span></label><br>
+                            <button class="btn btn-info btn-md" (click)="login()">Prijavite se</button>
+                        </div>
+                        <div id="register-link" class="text-right">
+                            <a class="nav-link" routerLink="/register" class="text-info">Registracija</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

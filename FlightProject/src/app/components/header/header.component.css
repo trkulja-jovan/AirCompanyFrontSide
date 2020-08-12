@@ -1,0 +1,9 @@
+
+.nav-item{
+    padding:2px;
+    margin-left: 7px;
+}
+
+a:active {
+    background-color: #a3a8a5;
+}
