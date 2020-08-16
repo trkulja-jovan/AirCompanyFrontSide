@@ -3,7 +3,6 @@ export class SearchFlight{
     constructor(
         public idAerodromOd : number,
         public idAerodromDo : number,
-        public tipPutovanja : number,
         public datumPolaska : Date,
         public datumPovratka : Date,
         public brPutnika : number,
@@ -14,7 +13,7 @@ export class SearchFlight{
     }
 
     static createDefaultValues() : SearchFlight {
-        return new SearchFlight(1, 2, 0, new Date(), new Date(), 1, 0, "Ekonomska klasa");
+        return new SearchFlight(1, 2, new Date(), new Date(), 1, 0, "Ekonomska klasa");
     }
 
 }

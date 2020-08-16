@@ -18,7 +18,7 @@ export class FlightInterceptors implements HttpInterceptor {
 
         if (skipIntercept) {
             const h = req.clone({
-            headers: req.headers.delete('skip')
+                headers: req.headers.delete('skip')
             });
             req = h;
             return next.handle(req);
@@ -31,6 +31,8 @@ export class FlightInterceptors implements HttpInterceptor {
         });
 
         req = head;
+
+        console.log("Usao sam u interceptor");
 
         return next.handle(req);
     }

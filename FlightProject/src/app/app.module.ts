@@ -19,6 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { FlightService } from './services/flight.service';
 import { FlightInterceptors } from './interceptors/FlightInterceptor.interceptor';
 import { ShowflightsComponent } from './components/showflights/showflights.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { ShowflightsComponent } from './components/showflights/showflights.compo
       preventDuplicates: true
     })
   ],
-  providers: [RegisterService, UserService, LoginService, AuthGuard, FlightService, {
+  providers: [RegisterService, UserService, LoginService, AuthGuard, FlightService, DatePipe, {
     provide : HTTP_INTERCEPTORS,
     useClass : FlightInterceptors,
     multi : true

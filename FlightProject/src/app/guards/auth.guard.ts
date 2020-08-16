@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(public userS : UserService, private router : Router){
 
   }
+  
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

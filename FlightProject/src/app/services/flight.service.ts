@@ -4,6 +4,7 @@ import { Airport } from '../model/airport';
 import { Observable } from 'rxjs';
 import { SearchFlight } from '../model/search-flight';
 import { Flight } from '../model/flight';
+import { Detailflight } from '../model/detailflight';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,14 @@ export class FlightService {
 
   searchFlight(body : SearchFlight) : Observable<Flight[]> {
     return this.http.post<Flight[]>("/api/flights/searchFlights", body);
+  }
+
+  searchReturnFlights(body : SearchFlight) : Observable<Flight[]> {
+    return this.http.post<Flight[]>("/api/flights/searchReturnFlights", body);
+  }
+
+  flightDetails(idLet : number) : Observable<Detailflight>{
+    return this.http.get<Detailflight>("/api/flight/details/" + idLet);
+
   }
 }

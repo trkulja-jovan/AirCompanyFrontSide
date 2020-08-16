@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Flight } from 'src/app/model/flight';
 import { element } from 'protractor';
 import { Init } from 'src/app/model/init';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
@@ -29,10 +30,13 @@ export class HomepageComponent implements OnInit {
   dateReceived : Date;
   dateSent : any;
 
+  tipPutovanja : number;
+
   constructor(private service : UserService, 
               private flightS : FlightService, 
               private toast : ToastrService,
-              private router : Router) { 
+              private router : Router,
+              private datePipe: DatePipe) { 
     this.toast.toastrConfig.timeOut = 1000;
   }
 
@@ -45,6 +49,21 @@ export class HomepageComponent implements OnInit {
   }
 
   searchFlight() {
+
+    var d1 = this.datePipe.transform(this.searchRes.datumPolaska, "yyyy-MM-dd");
+    var d2 = this.datePipe.transform(this.searchRes.datumPovratka, "yyyy-MM-dd");
+
+    this.searchRes.datumPolaska = new Date(d1);
+    this.searchRes.datumPovratka = new Date(d2);
+
+    console.log("Polazni aerodrom : " + this.searchRes.idAerodromOd 
+              + "Dolazni aerodrom: " + this.searchRes.idAerodromDo); 
+
+    if(this.tipPutovanja == 2){
+      this.flightS.searchReturnFlights(this.searchRes).subscribe(data => {
+        Init.setPovratniLets(data);
+      });
+    }
     
     this.flightS.searchFlight(this.searchRes).subscribe(data => {
       Init.setLets(data);
@@ -55,7 +74,7 @@ export class HomepageComponent implements OnInit {
   }
 
   onItemChange(value, broj : number){
-    this.searchRes.tipPutovanja = broj;
+    this.tipPutovanja = broj;
   }
 
   selectChangeHandler(event, x : number){
