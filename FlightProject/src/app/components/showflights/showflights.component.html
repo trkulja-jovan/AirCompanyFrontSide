@@ -68,8 +68,32 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="modal-body" [style.visibility]="detailFlight != null ? 'visible' : 'hidden'">
+          <table border="1">
+            <thead>
+              <tr>
+                <th *ngFor="let h of headerModal">
+                  {{h}}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let k of detailFlight.klasa">
+                <td >
+                  {{k.naziv}}
+                </td>
+                <td>
+                  {{usluge}}
+                </td>
+                <td>
+                  {{sedista}}
+                </td>
+                <td>
+                  {{detailFlight.cena}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>

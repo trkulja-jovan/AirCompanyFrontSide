@@ -43,7 +43,6 @@ export class FlightService {
   }
 
   flightDetails(idLet : number) : Observable<Detailflight>{
-    return this.http.get<Detailflight>("/api/flight/details/" + idLet);
-
+    return this.http.get<Detailflight>("/api/flights/details/" + idLet);
   }
 }

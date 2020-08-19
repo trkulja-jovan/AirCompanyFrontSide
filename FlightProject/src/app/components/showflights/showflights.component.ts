@@ -6,6 +6,8 @@ import { Init } from 'src/app/model/init';
 import { Klasa } from 'src/app/model/klasa';
 import { Airport } from 'src/app/model/airport';
 import { DatePipe } from '@angular/common';
+import { Detailflight } from 'src/app/model/detailflight';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-showflights',
@@ -17,13 +19,23 @@ export class ShowflightsComponent implements OnInit {
   public povratniLets : Flight[];
 
   public header : string[];
+  public headerModal : string[];
 
   polazniAer : Airport;
   dolazniAer : Airport;
 
-  constructor(private flightService : FlightService) { 
+  public usluge : string = "";
+  public sedista : string;
+
+  public detailFlight : Detailflight = new Detailflight();
+
+  constructor(private flightService : FlightService, private toast : ToastrService) { 
     this.header = [
       "Broj leta", "Aviokompanija", "Datum letenja", "Prikaži detalje"
+    ];
+
+    this.headerModal = [
+      "Klasa", "Usluge na letu", "Dostupna sedišta", "Cena"
     ];
   }
 
@@ -37,7 +49,20 @@ export class ShowflightsComponent implements OnInit {
   }
 
   showDetails(idLet : number){
-    console.log(idLet);
+    this.flightService.flightDetails(idLet).subscribe(data => {
+      this.detailFlight = data;
+
+      this.detailFlight.usluge.forEach(element => {
+        this.usluge += element.nazivUsluge + ", "
+      });
+
+      this.detailFlight.sedista.forEach(element => {
+        this.sedista += element.redniBroj + ", "
+      });
+
+    }, err => {
+      this.toast.error("Došlo je do greške prilikom prikazivanja podataka!", "Greška");
+    });
   }
 
 }
