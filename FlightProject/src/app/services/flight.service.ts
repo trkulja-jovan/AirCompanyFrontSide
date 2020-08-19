@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SearchFlight } from '../model/search-flight';
 import { Flight } from '../model/flight';
 import { Detailflight } from '../model/detailflight';
+import { PreTicket } from '../model/pre-ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,9 @@ export class FlightService {
 
   flightDetails(idLet : number) : Observable<Detailflight>{
     return this.http.get<Detailflight>("/api/flights/details/" + idLet);
+  }
+
+  reserveFlight(ticket : PreTicket) : Observable<string>{
+    return this.http.post<string>("/api/flights/reserve", ticket);
   }
 }

@@ -8,4 +8,5 @@ export class Detailflight {
 	public sedista : Sediste[];
 	
 	public cena : number;
+	public idLet : number;
 }

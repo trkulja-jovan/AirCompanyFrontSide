@@ -8,6 +8,8 @@ import { Airport } from 'src/app/model/airport';
 import { DatePipe } from '@angular/common';
 import { Detailflight } from 'src/app/model/detailflight';
 import { ToastrService } from 'ngx-toastr';
+import { PreTicket } from 'src/app/model/pre-ticket';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-showflights',
@@ -24,18 +26,19 @@ export class ShowflightsComponent implements OnInit {
   polazniAer : Airport;
   dolazniAer : Airport;
 
-  public usluge : string = "";
-  public sedista : string;
+  public uslugas : string = " | ";
+  public sedista : string = "";
 
   public detailFlight : Detailflight = new Detailflight();
+  public tick : PreTicket = new PreTicket();
 
-  constructor(private flightService : FlightService, private toast : ToastrService) { 
+  constructor(private flightService : FlightService, private toast : ToastrService, private userServ : UserService) { 
     this.header = [
       "Broj leta", "Aviokompanija", "Datum letenja", "Prikaži detalje"
     ];
 
     this.headerModal = [
-      "Klasa", "Usluge na letu", "Dostupna sedišta", "Cena"
+      "Klasa", "Usluge na letu", "Dostupna sedišta", "Cena", "Kupovina"
     ];
   }
 
@@ -51,18 +54,30 @@ export class ShowflightsComponent implements OnInit {
   showDetails(idLet : number){
     this.flightService.flightDetails(idLet).subscribe(data => {
       this.detailFlight = data;
-
+      this.uslugas = "";
       this.detailFlight.usluge.forEach(element => {
-        this.usluge += element.nazivUsluge + ", "
-      });
-
-      this.detailFlight.sedista.forEach(element => {
-        this.sedista += element.redniBroj + ", "
+        this.uslugas += element.nazivUsluge + " | ";
       });
 
     }, err => {
       this.toast.error("Došlo je do greške prilikom prikazivanja podataka!", "Greška");
     });
+  }
+
+  submitTicket() {
+    var da = confirm("Da li ste sigurni da želite da rezervišete kartu za izabrani let?");
+    if(da){
+      this.tick.idLet = this.detailFlight.idLet;
+      this.tick.token = this.userServ.token;
+
+      this.flightService.reserveFlight(this.tick).subscribe(data => {
+        var brKarte = data;
+
+        this.toast.success("Uspešno ste rezervisali kartu. Broj karte je " + brKarte, "Uspešno");
+      }, err => {
+        this.toast.error("Došlo je do greške prilikom rezervacije karte!", "Greška");
+      });
+    }
   }
 
 }

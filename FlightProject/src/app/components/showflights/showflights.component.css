@@ -247,4 +247,11 @@ h2 a {
 .container th:nth-child(4) { display: none; }
 }
 
+.tbody {
+  height:100px;overflow:auto;
+}
+
+.cell {
+  width: 200px;
+}
 
