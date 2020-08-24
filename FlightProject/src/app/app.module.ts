@@ -20,6 +20,8 @@ import { FlightService } from './services/flight.service';
 import { FlightInterceptors } from './interceptors/FlightInterceptor.interceptor';
 import { ShowflightsComponent } from './components/showflights/showflights.component';
 import { DatePipe } from '@angular/common';
+import { HistoryComponent } from './components/history/history.component';
+import { CheckInComponent } from './components/check-in/check-in.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { DatePipe } from '@angular/common';
     FooterComponent,
     HeaderComponent,
     HomepageComponent,
-    ShowflightsComponent 
+    ShowflightsComponent,
+    HistoryComponent,
+    CheckInComponent 
   ],
   imports: [
     BrowserModule,

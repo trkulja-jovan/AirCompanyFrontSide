@@ -1,0 +1,26 @@
+<div id="page">
+  <br><br><br><br>
+    <h1><span class="blue">Prikaz kupljenih karata</span><span class="blue"></span> <span class="yellow"></span></h1>
+      <h2><a href="http://pablogarciafernandez.com" target="_blank"></a></h2>
+      
+    <table class="container" [style.visibility]="historyResult.length > 0 ? 'visible' : 'hidden'">
+        <thead>
+          <tr>
+            <th *ngFor="let h of header">
+              <h1>{{h}}</h1>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of historyResult">
+            <td>{{h.brojKarte}}</td>
+            <td>{{h.cena}}</td>
+            <td>{{h.let.oznakaLeta}}</td>
+            <td>{{h.let.aviokompanija.nazivKompanije}}</td>
+            <td>{{h.let.podaciLeta.datumPolaska | date}}</td>
+            <td>{{h.let.podaciLeta.aerodrom1.grad}}</td>
+            <td>{{h.let.podaciLeta.aerodrom2.grad}}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>

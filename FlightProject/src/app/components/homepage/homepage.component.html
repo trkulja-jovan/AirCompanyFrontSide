@@ -74,34 +74,6 @@
                                            [value]="dateReceived">
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <span class="form-label">Broj putnika (+18)</span>
-                                    <select class="form-control"
-                                            [(ngModel)]="searchRes.brPutnika"
-                                            name="putnici">
-                                         <option *ngFor="let x of adult" [value]="x">
-                                                {{x}}
-                                         </option>
-
-                                    </select>
-                                    <span class="select-arrow"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <span class="form-label">Deca ( 0-17 )</span>
-                                    <select class="form-control" 
-                                            [(ngModel)]="searchRes.brDece"
-                                            name="deca">
-                                        <option *ngFor="let x of children" [value]="x">
-                                            {{x}}
-                                        </option>
-
-                                    </select>
-                                    <span class="select-arrow"></span>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                 <div class="form-btn">

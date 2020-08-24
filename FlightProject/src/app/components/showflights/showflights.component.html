@@ -1,6 +1,7 @@
 
   <div id="page">
-  <h1><span class="blue">&lt;</span><span class="blue"></span> <span class="yellow"></span></h1>
+    <br><br><br><br>
+  <h1><span class="blue">Prikaz letova</span><span class="blue"></span> <span class="yellow"></span></h1>
     <h2><a href="http://pablogarciafernandez.com" target="_blank"></a></h2>
     
     <table class="container">
@@ -87,23 +88,11 @@
                 <td class="cell">
                   {{uslugas}}
                 </td>
-                <td class="cell">
-                  <select name="sediste" [(ngModel)]="tick.idSediste">
-                    <option *ngFor="let sed of detailFlight.sedista" [value]="sed.idSediste">
-                      {{sed.redniBroj}}
-                    </option>
-                  </select>
-                </td>
                 <td>
-                  <select name="cena" [(ngModel)]="tick.cena">
-                    <option [value]="detailFlight.cena">
-                      {{detailFlight.cena}}
-                    </option>
-                  </select>
                   {{detailFlight.cena}}
                 </td>
                 <td>
-                  <button type="button" class="btn btn-primary" (click)="submitTicket()">Kupovina karte</button>
+                  <button type="button" class="btn btn-primary" (click)="submitTicket(k.naziv)">Kupovina karte</button>
                 </td>
               </tr>
             </tbody>

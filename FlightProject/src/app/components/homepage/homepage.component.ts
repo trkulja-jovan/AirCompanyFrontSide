@@ -18,13 +18,8 @@ import { DatePipe } from '@angular/common';
 export class HomepageComponent implements OnInit {
 
   airports : Airport[];
-  classes : string[];
-  children : number[];
-  adult : number[];
 
   searchRes : SearchFlight;
-
-  isFormValid : boolean;
 
   todayDate :  Date = new Date();
   dateReceived : Date;
@@ -42,9 +37,6 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchRes = SearchFlight.createDefaultValues();
-    this.classes = ["Ekonomska klasa", "Biznis klasa", "Prva klasa"];
-    this.children = [0,1,2,3,4];
-    this.adult = [1,2,3,4];
     this.flightS.getAllAirports().subscribe(data => this.airports = data);
   }
 
@@ -56,16 +48,22 @@ export class HomepageComponent implements OnInit {
     this.searchRes.datumPolaska = new Date(d1);
     this.searchRes.datumPovratka = new Date(d2);
 
-    console.log("Polazni aerodrom : " + this.searchRes.idAerodromOd 
-              + "Dolazni aerodrom: " + this.searchRes.idAerodromDo); 
-
     if(this.tipPutovanja == 2){
       this.flightS.searchReturnFlights(this.searchRes).subscribe(data => {
+        if(data === null || data.length === 0){
+          this.toast.info("Ne postoje letovi na osnovu izabranog kriterijuma!");
+          return;
+        }
         Init.setPovratniLets(data);
       });
     }
     
     this.flightS.searchFlight(this.searchRes).subscribe(data => {
+      if(data === null || data.length === 0){
+        this.toast.info("Ne postoje letovi na osnovu izabranog kriterijuma!");
+        return;
+      }
+
       Init.setLets(data);
 
       this.router.navigateByUrl("/flights");
@@ -86,9 +84,13 @@ export class HomepageComponent implements OnInit {
   }
 
   onDateChange(){
-    this.dateSent=new Date(this.searchRes.datumPolaska).getFullYear()+'-'+('0' + new Date(this.dateSent).getMonth()).slice(-2)+'-'+('0' + new Date(this.dateSent).getDate()).slice(-2);
+    this.dateSent=new Date(this.searchRes.datumPolaska).getFullYear()+'-'+('0' + new Date(this.dateSent)
+                                                       .getMonth())
+                                                       .slice(-2)+'-'+('0' + new Date(this.dateSent)
+                                                       .getDate())
+                                                       .slice(-2);
      
-    this.dateReceived=this.dateSent
+    this.dateReceived=this.dateSent;
   }
 
 

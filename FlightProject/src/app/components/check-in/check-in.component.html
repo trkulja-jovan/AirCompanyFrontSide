@@ -1,0 +1,29 @@
+<div id="page">
+    <br><br><br><br>
+      <h1><span class="blue">Online check - in</span><span class="blue"></span> <span class="yellow"></span></h1>
+        <h2><a href="http://pablogarciafernandez.com" target="_blank"></a></h2>
+        
+      <table class="container" [style.visibility]="result.length > 0 ? 'visible' : 'hidden'">
+          <thead>
+            <tr>
+              <th *ngFor="let h of header">
+                <h1>{{h}}</h1>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of result">
+              <td>{{h.brojKarte}}</td>
+              <td>{{h.let.oznakaLeta}}</td>
+              <td>{{h.let.podaciLeta.datumPolaska | date}}</td>
+              <td>
+                <button class="btn btn-primary" 
+                    data-toggle="modal" 
+                    data-target="#exampleModalCenter" 
+                    type="button" 
+                    (click)="checkIn(h.let.oznakaLeta)">Check in</button>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+  </div>

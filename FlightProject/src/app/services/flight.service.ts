@@ -6,6 +6,8 @@ import { SearchFlight } from '../model/search-flight';
 import { Flight } from '../model/flight';
 import { Detailflight } from '../model/detailflight';
 import { PreTicket } from '../model/pre-ticket';
+import { UserService } from './user.service';
+import { Karta } from '../model/karta';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class FlightService {
 
   lets : Flight[];
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private userS : UserService) { }
 
   getAllAirports() : Observable<Airport[]> {
     
@@ -47,7 +49,16 @@ export class FlightService {
     return this.http.get<Detailflight>("/api/flights/details/" + idLet);
   }
 
-  reserveFlight(ticket : PreTicket) : Observable<string>{
-    return this.http.post<string>("/api/flights/reserve", ticket);
+  reserveFlight(ticket : PreTicket) : Observable<boolean>{
+    return this.http.post<boolean>("/api/flights/reserve", ticket);
+  }
+
+  getHistoryData() : Observable<Karta[]> {
+
+    return this.http.get<Karta[]>("/api/flights/history/" + this.userS.username);
+  }
+
+  checkIn(oznakaLeta : string) : Observable<Boolean> {
+    return this.http.get<boolean>("/api/flights/checkIn/" + oznakaLeta);
   }
 }

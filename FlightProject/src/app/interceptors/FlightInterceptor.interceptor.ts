@@ -32,8 +32,6 @@ export class FlightInterceptors implements HttpInterceptor {
 
         req = head;
 
-        console.log("Usao sam u interceptor");
-
         return next.handle(req);
     }
 }

@@ -38,7 +38,7 @@ export class ShowflightsComponent implements OnInit {
     ];
 
     this.headerModal = [
-      "Klasa", "Usluge na letu", "Dostupna sedišta", "Cena", "Kupovina"
+      "Klasa", "Usluge na letu", "Cena", "Kupovina"
     ];
   }
 
@@ -64,18 +64,21 @@ export class ShowflightsComponent implements OnInit {
     });
   }
 
-  submitTicket() {
+  submitTicket(nazivKlase : string) {
     var da = confirm("Da li ste sigurni da želite da rezervišete kartu za izabrani let?");
     if(da){
       this.tick.idLet = this.detailFlight.idLet;
-      this.tick.token = this.userServ.token;
+      if(nazivKlase === "Ekonomska klasa")
+        this.tick.cena = this.detailFlight.cena;
+      else {
+        this.toast.info("Za biznis klasu osnovna cena se uvećava 2x");
+        this.tick.cena = this.detailFlight.cena * 2;
+      }
 
       this.flightService.reserveFlight(this.tick).subscribe(data => {
-        var brKarte = data;
-
-        this.toast.success("Uspešno ste rezervisali kartu. Broj karte je " + brKarte, "Uspešno");
-      }, err => {
-        this.toast.error("Došlo je do greške prilikom rezervacije karte!", "Greška");
+        if(data){
+          this.toast.success("Karta je rezervisana!", "Uspešno");
+        }
       });
     }
   }
