@@ -11,4 +11,8 @@ export class UserFull {
         public logindata : User){
 
         }
+
+    public static createDefaultValues(){
+        return new UserFull("", new Date(), "", "", "", new User("",""));
+    }
 }

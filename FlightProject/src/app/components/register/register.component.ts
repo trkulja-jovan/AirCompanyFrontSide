@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
               private toast : ToastrService) { }
 
   ngOnInit(): void {
-    this.registerUser = new UserFull("", new Date(), "", "", "", new User("",""));
+    this.registerUser = UserFull.createDefaultValues();
    
   }
 
@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(["/login"]);
   }
 
-  async checkValidity(value : string){ 
+  checkValidity(value : string){ 
 
     this.tempText = value;
 

@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { UserToken } from 'src/app/model/user-token';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-login',

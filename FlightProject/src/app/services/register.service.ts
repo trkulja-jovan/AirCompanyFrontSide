@@ -43,6 +43,6 @@ export class RegisterService {
 
   registerOnServer(user : UserFull) : Observable<boolean>{
 
-    return this.http.post<boolean>("/api/login/register", user)
+    return this.http.post<boolean>("/api/login/register", user);
   }
 }
